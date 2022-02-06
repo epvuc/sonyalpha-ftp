@@ -44,9 +44,11 @@ these rules need to be on the FORWARD chain, because the packets are
 traversing NAT, being inbound on a real world IP and ending up on
 docker on 172.17.whatever. 
 
-`iptables -A block -p tcp -o docker0  --dport 21 -j ACCEPT  # sony ftp
+```
+iptables -A block -p tcp -o docker0  --dport 21 -j ACCEPT  # sony ftp
 iptables -A block -p tcp -o docker0 --destination-port 10090:10100 -j ACCEPT
-`
+```
+
 vsftp is gross and can only log to a file, which defaults to 
 /var/log/vsftpd.log.  If you try to tell it to write to /dev/stdout instead 
 it fails, either because it's stupid or because it's chrooting to some 
@@ -57,8 +59,10 @@ this awful thing in the Dockerfile and then it does work:
 
 To do stuff automatically with the uploaded files, you can install `inoticoming` and run this:
 
-`inoticoming --logfile /var/log/inoticoming.log /dstate/sonyftp/srv \
-    --stdout-to-log /dstate/sonyftp/incoming-camftp.sh {} \;`
+```
+inoticoming --logfile /var/log/inoticoming.log /dstate/sonyftp/srv \
+    --stdout-to-log /dstate/sonyftp/incoming-camftp.sh {} \;
+```
 
 which will watch the incoming ftp dir for new files, and call 
 incoming-camftp.sh on them, which can do whatever you want.

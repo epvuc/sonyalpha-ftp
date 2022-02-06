@@ -4,8 +4,7 @@ setup for serving ftp for sony alpha digital camera uploads
 I make no claims to authorship of any of these pieces, I just made a dockerfile and
 startup script to get vsftpd running with the correct parameters.
 
-Be aware that this is insecure due to being forced to use obsolete SSL configuration. It's
-probably safest to only use it on an internal network. 
+**Be aware that this is insecure due to being forced to use obsolete SSL configuration. It's probably safest to only use it on an internal network.**
 
 This is all to allow sony mirrorless cameras to upload images via
 ftp directly from the camera. The camera firmware has an outdated
@@ -31,7 +30,9 @@ logins from the camera fail with no errors logged. The directory
 never gets used, but it has to be there. Also note that while you can put
 SSL certs in there are have vsftpd use them, as far as I can tell the camera
 will never actually accept them and you'll have to click through the
-warning about that when you first enble ftp mode on the camera. 
+warning about that when you first enable ftp mode on the camera. So they may
+as well be self-signed, and even if you upload self-signed certs' CA cert
+to the camera, it won't use it and you'll still have to click through the warning.
 
 The camera wants to use passive ftp mode and for that the ftp server
 needs to know the IP address clients will connect back to it on,

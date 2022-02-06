@@ -15,12 +15,15 @@ in modern linux distros, so we install debian 10 but then replace
 Then the vsftpd config file will be able to forbid TSLv1.2 and force
 1.1. 
 
-To build and run: 
+To build: 
 
-`cd build; docker build -t sonyftp-deb10 .
-cd ..; sh start-sonyftp.sh`
+`docker build -t sonyftp-deb10 .`
 
-the "srv" directory needs to contain a subdir named "ftp" or else 
+It needs a working directory for uploads to end up in and for ssl certs, etc.
+I'm using `/dstate/sonyftp` in the `start-vsftpd.sh` script here. 
+
+The working directory needs to contain a directory `srv` which needs to 
+contain a subdir named "ftp" or else 
 logins from the camera fail with no errors logged. The directory 
 never gets used, but it has to be there. 
 
@@ -46,12 +49,10 @@ this awful thing in the Dockerfile and then it does work:
 
 `ln -sf /proc/1/fd/1 /var/log/vsftpd.log`
 
-To do stuff automatically with the uploaded files, you can run this:
+To do stuff automatically with the uploaded files, you can install `inoticoming` and run this:
 
-`inoticoming --logfile /var/log/inoticoming.log /where/ever/sonyftp/srv \
+`inoticoming --logfile /var/log/inoticoming.log /dstate/sonyftp/srv \
     --stdout-to-log /dstate/sonyftp/incoming-camftp.sh {} \;`
 
 which will watch the incoming ftp dir for new files, and call 
-incoming-camftp.sh on them, which will then upload them to nextcloud 
-in an organized way. 
-
+incoming-camftp.sh on them, which can do whatever you want.

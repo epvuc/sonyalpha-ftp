@@ -4,7 +4,7 @@ setup for serving ftp for sony alpha digital camera uploads
 I make no claims to authorship of any of these pieces, I just made a dockerfile and
 startup script to get vsftpd running with the correct parameters.
 
-Be aware that this is insecure due to being forced to using obsolete SSL. It's
+Be aware that this is insecure due to being forced to use obsolete SSL configuration. It's
 probably safest to only use it on an internal network. 
 
 This is all to allow sony mirrorless cameras to upload images via

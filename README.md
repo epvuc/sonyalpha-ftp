@@ -62,3 +62,8 @@ To do stuff automatically with the uploaded files, you can install `inoticoming`
 
 which will watch the incoming ftp dir for new files, and call 
 incoming-camftp.sh on them, which can do whatever you want.
+
+Once you have the working directory, certs, and iptables rules in place,
+you can edit `start-vsftpd.sh` to configure the pathnames, FTP password, etc,
+and run it to launch the container, after which hopefully the camera will be
+willing to upload to it. 
